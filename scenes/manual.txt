@@ -1,0 +1,1005 @@
+-tag init
+-tvar cont = 0
+
+-tag start
+You start feeling yourself, your senses begin drawing information from the environment, nothing unpleasant at the moment. 
+-nl
+The temperature is nice and cozy, and you feel your feet touching the ground with the naked skin, with an increasing pressure until your weight is fully supported by your legs. Your arms, straightened outwards to the sides, descend until they hang from your shoulders.
+
+The scenary around you is pure white, it makes you blink rapidly until you get used to it. The whiteness extends towards the horizon and you turn around trying to find anything other than a white vastness.
+-nl
+Your eyes are instantly drawn towards the only thing there, something you weren't expecting to find.
+
+
+-pause
+A small person sitting on the ground, with a big nose, gray robes and a pointy gray hat with the tip bent at the top.
+
+"Hello there!" he grunts as he leans one way pushing himself up "oh, here we go again," he mutters under his breath. "Well, how was the journey? Bumpy? Exiting?" he takes a deep breath and sighs "boring as hell while locked in a white vastness?" he arches forward and dusts himself off.
+
+-single_pick
+  #"I'm just here for the tutorial"
+    "I'm just here for the tutorial"
+
+    "Hm," he stops for a second after grunting. "Everyone does," he chuckles, "alright, this is going to be quick then. Let's move on" he says turning around and walking away "I thought that face was familiar, but with so many of them you're never sure, haha".
+
+  #"Maybe a little bumpy."
+    "Maybe a little bumpy."
+
+    "A little bumpy, yeah, what I would give for a little bumpiness," he turns away to the empty flat horizon and sighs.
+
+    You turn to look too, but there's nothing else but a flat ground dissolving into an indistinguishable white horizon. "Does it have an end?" you ask.
+
+  #"I'm excited! Yes!"
+    "I'm excited! Yes!"
+
+    "Wonderful! One who pays attention, how nice of you. Not to judge but," he leans closer and puts the back on his hand besides his mouth, "you would be shocked to see how many weirdos come through here" he coughs, interrupting himself. "Well, how about we start now? Come, walk with me," he says moving his hand and begins walking away.
+
+  #"I was just checking out, I didn't think I'd find someone here."
+    "I was just checking out, I didn't... "
+
+    "Yeah, yeah" he interrupts you, "nobody wants to come across a small wizard of the imagination in an empty white vastness. You get used to that pretty quickly," he says shaking his head while looking down.
+
+    "I didn't mean that."
+
+    "hmmm, don't worry, you're not going to be the last one," he shakes his hand dismissing you. "Let's get on with this before you begin asking the wrong questions."
+
+    "What wrong questions?"
+
+    "Don't worry about that, there are no wrong questions! Right? We are here to learn, or rather you, you are here to learn, and I'll help you with that."
+
+  -if manual_completed #"Let's go straight to the point."
+    "Let's go straight to the point."
+
+    The wizard squints at you, and after three short seconds of silence, he speaks. "I knew I had seen that face before," he nods to himself, "yeah, alright, it's fair, let's go to the point, shall we?"
+
+    -go panel
+
+-tag continue
+You turn around to check one more time and still see the nothingness around you.
+
+"Come on, don't get delayed, I don't want to lose you around here, it might be dangerous."
+
+The wizard walks away from you at a slow pace dragging the streaks of his robe on the ground and you follow behind.
+
+-pause
+-go panel
+
+-tag panel
+-tvar selection = ""
+"Alright, we are here."
+
+You look around, and the place looks exactly as every other place in your view. "There's nothing here." 
+
+"Oh," he looks at his side, "if you could help me out a little bit here," he swings his hand up and a bunch of items start to emerge from the ground and float in front of you.
+
+"What is this?" you ask looking at the arrangement of items.
+
+"These are categories," the wizard opens his arm showing the floating bubbles. "You can pick whichever you like to learn more about, come on, try one," he says and steps back.
+
+-go main_selection
+
+-tag main_selection
+-pick
+  #Structural commands
+    -go STRUCTURAL_COMMAND
+  #Navigation commands
+    -go NAVIGATION_COMMAND
+  #Choice commands
+    -go CHOICE_COMMAND
+  #Logic commands
+    -go LOGIC_COMMAND
+  #Variable commands
+    -go VARIABLE_COMMAND
+  #String commands
+    -go STRING_COMMAND
+  #List commands
+    -go LIST_COMMAND
+  #Save and load commands
+    -go SAVELOAD_COMMAND
+  #Stats panel
+    -go STATS_PANEL
+  #Author tools
+    -go AUTHOR_TOOLS
+  #Meta and display syntax
+    -go META_COMMAND
+  #I have everything I need.
+    -go finishing
+
+
+-tag STRUCTURAL_COMMAND
+You select the item and the floating bubbles go down and up again with a different arrangement of items.
+
+"Structural commands," the wizard says, "These are the bones. The scaffolding. This is what holds your story up, mostly, and some are just decorators. But it is a good place to start, you know, slow steps take you further away."
+
+-tag structural_selection
+-remove_permanent_stat "Imagination"
+-pick
+  #-tag
+    "-tag," he says, holding up a finger. "Every location in your story needs a name. A tag is that name. You write -tag followed by the name, and everything below it until the next tag belongs to that location. Simple as breathing. Well, for most people."
+
+    [i]Syntax: -tag tagname[/i]
+
+    "No spaces in the name, mind you. Use underscores if you need them. forest_clearing, not forest clearing."
+
+    -go structural_selection
+  #-title
+    "The -title command goes in your config file, not your story file," the wizard clarifies, waggling a finger. "It sets the name of your whole project. The thing that appears at the top when someone opens it."
+
+    [i]Syntax: -title My Amazing Story[/i]
+
+    "Most of the times it's just a set it and forget it. If you have one already," he shrugs with one shoulder, "but you won't actually need one until you want to go public, so you can use whatever giberish comes to your head as a placeholder. Just, don't forget to change it later, believe me, it happens."
+
+    -go structural_selection
+  #-author
+    "Your name," he says simply. "Or a pen name. Or 'Anonymous' if you're the shy type. Goes in the config file."
+
+    [i]Syntax: -author Wizard of the Imagination[/i]
+
+    "It doesn't affect how the story runs. Just metadata. But future readers will want to know who to blame for the things they can't unread."
+
+    -go structural_selection
+  #-version
+    "Version tracking. Also in the config." He pulls a tiny scroll from his sleeve and unrolls it dramatically. "When you change your story significantly, you bump this number. There are safety structural checks so the universe you create doesn't break, so it isn't strictly necessary," he purses his lips,  "but you might as well use it if you want to do things the right way," he shrugs.
+    
+    [i]Syntax: -version 1.2[/i]
+
+    "Start at 1.0. When you break things, go to 2.0. When you fix small things, go to 1.1. That's all there is to it."
+
+    -go structural_selection
+  #-files
+    "The -files block in your config tells the engine which story files to load, and in what order." He waves his hand and a small diagram shimmers in the air. "One filename per line, indented. No extensions needed."
+
+    [i]Syntax:[/i]
+
+    [i]-files[/i]
+    -nl
+    [i]  chapter_one[/i]
+    -nl
+    [i]  chapter_two[/i]
+    -nl
+    [i]  chapter_three[/i]
+
+    "Order matters. The engine loads them top to bottom. When you use the -next command in chapter_one, the story will continue in the next one from that list."
+
+    -go structural_selection
+  #-indent
+    "By default the engine expects two spaces of indentation for nested content," the wizard says. "If you prefer four, or you have a team that insists on tabs converted to four spaces, you can change it here."
+
+    [i]Syntax: -indent 4[/i]
+
+    "Put it in your config. Must be a positive integer. And then be consistent. Mixing indentation sizes is the fastest way to start breaking stuff."
+
+    -go structural_selection
+  #-define_goal
+    "Goals are achievements. Moments in your story where something meaningful happened." He leans forward conspiratorially. "You define them in the config, give them a name, a description, some points if you like. Then in the story you use -reach_goal to trigger them."
+
+    [i]Syntax in config.txt:[/i]
+
+    [i]-define_goal found_the_key[/i]
+    -nl
+    [i]  -prompt = "Found the hidden key"[/i]
+    -nl
+    [i]  -description = "You discovered the key behind the painting."[/i]
+    -nl
+    [i]  -points = 10[/i]
+
+    "In the story file: -reach_goal found_the_key. That's the whole connection. A little advanced tip," he leans even closer squinting with one eye, "The goals can be used as boolean to check if they have been reached or not, and they persist even if you go back on the story, so you can think about how to use them in clever ways," he winks at you and goes back to standing straight.
+
+    -go structural_selection
+  #-cheat_mode
+    "Cheat mode," he says with a small grin. "Put it in the config or anywhere in your story, and players can rewind their last choice and try something different. Some authors ship with it on. Some consider it sacrilege." He shrugs. "Your story, your call."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-cheat_mode true[/i]
+    -nl
+    [i]-cheat_mode false[/i]
+
+    "Use true or false. It comes deactivated by default, so no worries if you forgot to put it."
+
+    -go structural_selection
+  #-permanent_stat
+    -permanent_stat 1 "Imagination" imagination
+    "Permanent stats" he says looking up and scratching his jaw under his beard. "Don't mind looking up if you're not on a mobile device, cause this feature is thought for them."
+
+    "What is it?"
+
+    "A permanent stat is shown in a special bar at the top. Mobile devices have less space to show stuff, so if you have a scene that perhaps depends a lot on some stats, you can avoid making your readers going back and forth from the stat screen to the story and instead display them right there. It is more convenient, and perhaps allows them to keep immersed in your world instead of having to worry about hunting a stat through the menus."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-permanent_stat slot_number "variable_name" variable[/i]
+    -nl
+    [i]-permanent_stat 1 "Health" hp[/i]
+    -nl
+    [i]-permanent_stat 2 "Strength" str[/i]
+    -nl
+    [i]-permanent_stat 3 "Mana" mana[/i]
+
+    "You only have 4 slots, and you can remove them using the "-remove_permanent_stat" command whenever you want to stop showing it, or when you want to free up a slot for other stat.
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-remove_permanent_stat "variable_name"[/i]
+    -nl
+    [i]-remove_permanent_stat "Health"[/i]
+    -nl
+    [i]-remove_permanent_stat "Mana"[/i]
+
+    -go structural_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag NAVIGATION_COMMAND
+"Navigation," the wizard says, taking an object from one of his pockets and tossing it to you.
+
+You catch it int he air, embracing it against your chest before it can slip out of your grip. Upon a closer look, the dark hexagonal box with inlaid golden line traces opens in half, and a spinning needle suddenly stops, pointing ahead. You turn your eyes up and see the wizard standing with crossed arms staring at you.
+
+"Enough play," he says and with a snap of his fingers the compass puffs out of existence from your hand and appears in his. "These are going to be the instructions where to go, wuere not to go, where to return, when to pause," he says lifting a finger and making a brief pause, "What paths are available, and so on. Come on, take a look, and don't get lost."
+
+-tag navigation_selection
+-pick
+  #-go
+    "The simplest command in the whole language," he says, almost reverently. "-go followed by a tag name. Sends the story there. Immediately. No questions asked."
+
+    [i]Syntax: -go tagname[/i]
+
+    "It only works within the same file. For jumping between files, you'll want -go_file. But for most of your story, -go is all you need."
+
+    -go navigation_selection
+  #-go_back
+    "-go_back is the return ticket," the wizard explains. "You use it to return from a subroutine, a section you jumped into using -go_and_back. When the engine hits -go_back it pops back to wherever it came from."
+
+    [i]Syntax: -go_back[/i]
+
+    "No arguments. It just knows. If you call it without having used -go_and_back first, the game breaks, so make wure all the paths leading to it come from a -go_and_back command."
+
+    -go navigation_selection
+  #-go_and_back
+    "Now this one is interesting," he says, standing up straighter. "-go_and_back sends the story to another file, and when that section ends, the story automatically returns to the line right after the -go_and_back call."
+
+    [i]-go_and_back filename tagname[/i]
+
+    "Think of it like a subroutine. You jump somewhere, do a thing, and come back. Useful for reusable scenes, a combat encounter, a dream sequence, a flashback, that can be called from multiple places in the story." After a short silence, he frowns and lifts a brow. "Want to see it in action?"
+
+    -go navigation_selection
+  #-go_file
+    "-go_file jumps to a tag in a different file entirely," he says. "Your story can span multiple files, and this is how you connect them."
+
+    [i]Syntax: -go_file filename tagname[/i]
+
+    "The filename is the same name you listed in -files in your config. No extension. The tag is where you want to land inside that file. If you leave out the tag, it lands at the very first tag in that file."
+
+    "Unlike -go_and_back, this is a one-way trip. There's no automatic return."
+
+    -go navigation_selection
+  #-next
+    "-next moves the story to the next file in your -files list," the wizard explains. "When you reach the end of a chapter and want to seamlessly continue to the next one without specifying its name, -next does that."
+
+    [i]Syntax: -next[/i]
+
+    "No arguments. Just -next. It finds whatever file comes after the current one in your config and jumps to its first tag. Make sure not to use it in your last file."
+
+    -go navigation_selection
+  #-pause
+    "A -pause stops the story and waits. The player sees a Continue button. That's all it does." He pauses deliberately. "Like that."
+
+    [i]Syntax: -pause[/i]
+
+    "Use it to break up long passages of text. Give the reader a moment to breathe before you bury them in more words."
+
+    -go navigation_selection
+  #-nl
+    "-nl inserts a line break inside a paragraph," he says. "Normally the engine joins consecutive lines of text together. If you want a hard break in the middle of prose without starting a new paragraph, use -nl."
+
+    [i]Syntax: -nl[/i]
+    -nl
+    "Like this."
+    -nl
+    "And this."
+
+    "Each -nl above created a visible break. You just saw it."
+
+    -go navigation_selection
+  #-pic
+    "-pic displays an image," he says. "You give it a filename, relative to your images folder, and optionally an alignment."
+
+    [i]Syntax: -pic filename.png[/i]
+    -nl
+    [i]or: -pic filename.png left[/i]
+    -nl
+    [i]or: -pic filename.png right[/i]
+
+    "Default alignment is center. The image must exist in your project's images folder. If it doesn't, the engine will show a warning and skip it gracefully. I'll look horrible, but at least they can play it."
+
+    -go navigation_selection
+  #-end
+    "The story is over," he says flatly. "-end terminates the story. The engine shows the end screen. Players can rate it, replay it, cry about it. Whatever they do after a questionable good story."
+
+    [i]Syntax: -end[/i]
+
+    "No arguments. This is your final command, if you forget it, things will break."
+
+    -go navigation_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag CHOICE_COMMAND
+"Choices," the wizard says, spreading both arms wide. "The whole point of interactive fiction. Without choices you have a novel, and there are libraries full of those already."
+
+-tag choice_selection
+-pick
+  #-pick
+    "The fundamental choice block," he says. "-pick opens a menu of options. Each option starts with a # symbol and the label text. Everything indented beneath that # is what happens when the player selects it."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-pick[/i]
+    -nl
+    [i]  #First option[/i]
+    -nl
+    [i]    Text that appears if first option is chosen.[/i]
+    -nl
+    [i]    -go somewhere[/i]
+    -nl
+    [i]  #Second option[/i]
+    -nl
+    [i]    Text that appears if second option is chosen.[/i]
+    -nl
+    [i]    -go somewhere_else[/i]
+
+    "Every branch should end with a -go, -end, or some other navigation command. Otherwise the story falls through to the next tag, which may or may not be what you want."
+
+    "Want to try a -pick right now?"
+    -pause
+    -pick
+      #Yes, demonstrate it.
+        "Good. You just used one. You're in it right now, in fact. Welcome."
+
+        -go choice_selection
+      #No thanks.
+        "Reasonable. Moving on."
+
+        -go choice_selection
+  #-pick_once
+    "-pick_once works exactly like -pick," the wizard says, "except each option can only be selected once. After a player picks it, if the story happens to go through the same pick_once again, it appears greyed out. They can still see it was there, but they can't choose it again."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-pick_once[/i]
+    -nl
+    [i]  #You can only pick this once[/i]
+    -nl
+    [i]    Something happens.[/i]
+    -nl
+    [i]    -go somewhere[/i]
+
+    "You can also use it for individual choices."
+
+    [i]-pick[/i]
+    -nl
+    [i]  -pick_once #You can only pick this once[/i]
+    -nl
+    [i]    Something happens.[/i]
+    -nl
+    [i]    -go somewhere[/i]
+    -nl
+    [i]  #Normal choice[/i]
+
+    "Useful for finite resources, unique events, things that should only happen once per playthrough. The engine tracks which options were used internally and you can reset the tracking with the -reset_pick command. Make sure your loop doesn't get all the choices unavailable, otherwise the player won't have a way to get out from there."
+
+    "Try it here, these options disappear after you pick them:"
+    -pause
+
+    -pick_once
+      #Option A (disappears after picking)
+        "You chose A. It won't be available next time you visit."
+
+        -go choice_selection
+      #Option B (disappears after picking)
+        "You chose B. Same deal."
+
+        -go choice_selection
+      #Back without picking
+        -reset_pick
+        "Alright, I'll reset the picks tracking here in case you want to test them again."
+
+        -go choice_selection
+  #-pick_if
+    "-pick_if shows or hides a choice based on a condition," he explains. "If the condition is true, the option appears available. If false, it's greyed out and unselectable, or hidden entirely if you use the -if variant inside a pick block."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-pick[/i]
+    -nl
+    [i]  -pick_if player_strength > 10 #Force the door open[/i]
+    -nl
+    [i]    The door splinters.[/i]
+    -nl
+    [i]    -go beyond_door[/i]
+    -nl
+    [i]  #Try the key instead[/i]
+    -nl
+    [i]    You fumble with the key.[/i]
+    -nl
+    [i]    -go key_attempt[/i]
+
+    "The condition uses the same expressions as -if. Any variable comparison works. This is how you create choices that are only available when the player has earned them."
+
+    -go choice_selection
+  #-reset_pick
+    "-reset_pick clears the record of which pick_once options have been used," the wizard says. "If you want enable the choices again, put -reset_pick somewhere along the way."
+
+    [i]Syntax: -reset_pick[/i]
+
+    "No arguments. It clears all used-choice flags for the current session. Use it sparingly, the whole point of pick_once is that things stay used."
+
+    -go choice_selection
+  #-single_pick
+    "-single_pick is like -pick, but it goes straight through," he says. "After the player makes a choice, the block is done. The story moves on to the next tag automatically."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-single_pick[/i]
+    -nl
+    [i]  #Left path[/i]
+    -nl
+    [i]    You go left.[/i]
+    -nl
+    [i]  #Right path[/i]
+    -nl
+    [i]    You go right.[/i]
+    -nl
+    [i]-tag continues[/i]
+    -nl
+    [i]Both choices continue here.[/i]
+
+    "Unlike regular -pick, single_pick doesn't need a -go inside each branch. After any branch runs, it falls through to the next tag. Of course you can still use -go if you want to branch to different places."
+
+    -go choice_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag LOGIC_COMMAND
+"Logic," the wizard says, sitting down cross-legged. "Conditions. Branching without player input. The engine checking what state the world is in and deciding what happens next."
+
+-tag logic_selection
+-pick
+  #-if
+    "The simplest conditional." He draws an invisible shape in the air. "If the condition is true, the block beneath it runs. If false, it's skipped entirely."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-if condition[/i]
+    -nl
+    [i]  Text or commands that run if true.[/i]
+
+    "The condition is a Python-style expression. player_health > 0. has_key == true. courage >= 50. Whatever you've set up with your variables."
+
+    "Want to see it work? I'm going to check a hidden variable right now."
+    -pause
+    -tvar demo_var = 1
+    -if demo_var == 1
+      "The condition was true," the wizard says. "demo_var equals 1. The engine ran this block."
+    -if demo_var == 99
+      "You would never see this line. The condition is false."
+
+    -go logic_selection
+  #-elseif
+    "-elseif comes after an -if and provides an alternative condition," he explains. "If the -if was false, the engine checks the -elseif. If that's true, that block runs."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-if courage > 70[/i]
+    -nl
+    [i]  You charge forward fearlessly.[/i]
+    -nl
+    [i]-elseif courage > 40[/i]
+    -nl
+    [i]  You advance cautiously.[/i]
+
+    "You can chain multiple -elseif blocks one after another. The engine checks them in order and runs the first one that's true."
+
+    -go logic_selection
+  #-else
+    "-else is the fallback," he says. "If every -if and -elseif before it was false, the -else block runs. It has no condition, it always runs if nothing else did."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-if courage > 70[/i]
+    -nl
+    [i]  You charge forward.[/i]
+    -nl
+    [i]-elseif courage > 40[/i]
+    -nl
+    [i]  You advance cautiously.[/i]
+    -nl
+    [i]-else[/i]
+    -nl
+    [i]  You hide behind a barrel.[/i]
+
+    "Only one -else per if/elseif chain. It goes at the end. No condition allowed, that would defeat the purpose."
+
+    "Together -if, -elseif, and -else give you the full conditional toolkit. Most of your story logic will live in these three."
+
+    -go logic_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag VARIABLE_COMMAND
+"Variables," the wizard announces with some ceremony. "The memory of your story. Numbers, words, flags, the things that make one player's experience different from another's."
+
+-tag variable_selection
+-pick
+  #-var
+    "-var declares a permanent variable in your config file," he says. "It sets the starting value for the whole story. Every playthrough begins with this value."
+
+    [i]Syntax (in config.txt):[/i]
+    -nl
+    [i]-var player_health = 100[/i]
+    -nl
+    [i]-var weapon = "Hammer"[/i]
+    -nl
+    [i]-var money = 43[/i]
+    -nl
+    [i]-var player_friend = "Lubdran"[/i]
+    -nl
+    [i]-var treasure_key = false[/i]
+
+    "Variables can be integers, decimals, booleans (true or false), or double-quoted strings. Once declared in config, they're available everywhere in your story."
+
+    -go variable_selection
+  #-mvar
+    "-mvar modifies a variable," he explains. "It's your main tool for changing values during the story. It supports all the standard operators."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-mvar varname operator value[/i]
+    -nl
+    [i]Operators: = += -= *= /= %+ %- %=[/i]
+
+    "The = operator sets a new value. += adds to it. -= subtracts. And so on." He pauses. "The %+ and %- are special fairmath operators. They push a value toward 100 or 0 proportionally, so it's harder to reach the extremes. Useful for relationship scores."
+
+    -go variable_selection
+  #-tvar
+    "-tvar is a temporary variable," the wizard says. "It exists only within the current scene file. When the story moves to the next file, tvar values are wiped. Use them for local calculations you don't need to carry forward, or flags that won't be used elsewhere."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-tvar varname = value[/i]
+
+    "Internally the engine prefixes the name with an underscore. So -tvar score = 0 creates _score. This keeps it separate from your permanent variables."
+
+    -go variable_selection
+  #-%+ and -%-
+    "Fairmath," he says, clearly pleased with the topic. "If you like numbers, this is your pool to swim. I don't know wher eit comes from, but all it does, is to put a limit to how much a number can grow or decrease proportionally to what it is compared to the amount you want it to change." The wizard looks at your face and purses his lips. "Right, well, the default value goes from 0 to 100, so if you don't want to track your status at every point you need to modify it to not go over or under the limit, you can use this."
+    
+    [i]Syntax:[/i]
+    -nl
+    [i]-%+ varname amount[/i]
+    -nl
+    [i]-%- varname amount[/i]
+    
+    Or you can use it with -mvar too:
+    -nl
+    [i]-mvar Jenny_relationship %- 20[/i]
+    -nl
+    [i]-mvar John_relationship %+ 15[/i]
+
+    "If courage is at 50 and you do -%+ courage 20, it doesn't become 70. It becomes 60. The engine calculates 20% of the remaining distance to 100, which is 20% of 50, which is 10. So 50 + 10 = 60."
+
+    "This means values asymptotically approach the maximum. Getting from 0 to 50 is easy. Getting from 90 to 100 takes many pushes. More realistic for things like trust or reputation."
+
+    -go variable_selection
+  #-entropy
+    "-entropy generates a seeded random number," the wizard explains. "Unlike pure randomness, this is deterministic, the same seed always produces the same result. This means saves and replays work correctly."
+
+    [i]Syntax: -entropy varname seed low-high[/i]
+    -nl
+    [i]Example: -entropy roll 42 1-20[/i]
+
+    "This sets 'roll' to a random number between 1 and 20, seeded with 42. Every time that line runs in a fresh playthrough, it produces the same number. But different seeds produce different numbers."
+
+    -go variable_selection
+  #-user_input
+    "-user_input stops the story and shows the player a text field," he says. "Whatever they type gets stored in the variable you specify."
+
+    [i]Syntax: -user_input varname[/i]
+    -nl
+    [i]or: -user_input varname What is your name?[/i]
+
+    "The optional text after the variable name becomes the prompt label shown to the player. After they submit, the story continues and you can use that variable anywhere in text with ${varname}, in conditions, wherever."
+
+    -go variable_selection
+  #-winner and -loser
+    "These commands find the highest or lowest value from a list of variables," the wizard says. "Useful for determining outcomes after a series of events."
+    
+    [i]Syntax: -winner result_var (var1, var2, var3)[/i]
+    -nl
+    [i]-loser result_var (var1, var2, var3)[/i]
+
+    "The engine compares all the listed variables and stores the name of the winner, the one with the highest value, in result_var. It also creates result_var_score and result_var_count with supporting data."
+
+    "Say you're tracking how much the player helped three characters: helped_alice, helped_bob, helped_carol. -winner best_helped (helped_alice, helped_bob, helped_carol) tells you who got the most help."
+
+    -go variable_selection
+  #-average and -range
+    "-average calculates the mean of a list of variables," he explains. "-range calculates the difference between the highest and lowest."
+
+    [i]Syntax: -average result_var (var1, var2, var3)[/i]
+    -nl
+    [i]-range result_var (var1, var2, var3)[/i]
+
+    "The result is stored in the variable you name. Useful for balancing, skill checks, or any time you need aggregate statistics from a group of values."
+
+    -go variable_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag STRING_COMMAND
+"String commands," the wizard says, brushing something off his robe. "For when you have text in a variable and need to change how it looks. Capitalization, that sort of thing."
+
+-tag string_selection
+-pick
+  #-upper
+    "Converts a string variable to ALL CAPS," he says simply. "Good for emphasis, display headers, shouting."
+
+    [i]Syntax: -upper varname[/i]
+
+    "Modifies the variable in place. If the variable held 'hello world' it now holds 'HELLO WORLD'. Be careful, once uppercase, the original casing is gone unless you saved it elsewhere."
+
+    -go string_selection
+  #-lower
+    "Opposite of -upper. Converts to all lowercase."
+
+    [i]Syntax: -lower varname[/i]
+
+    "Useful for normalizing input, if the player typed their name in all caps, you might want to lowercase it before doing comparisons."
+
+    -go string_selection
+  #-naming
+    "-naming applies title case," the wizard explains. "First letter of each word capitalized. The rest lowercase."
+
+    [i]Syntax: -naming varname[/i]
+
+    "If the player typed their name as 'john smith' and you run -naming on it, it becomes 'John Smith'. More polished when displaying character names in prose."
+
+    -go string_selection
+  #-turn_around
+    "This one reverses a string," he says, looking slightly amused. "End to beginning."
+
+    [i]Syntax: -turn_around varname[/i]
+
+    "'hello' becomes 'olleh'. Mostly a curiosity, but occasionally useful for puzzles or cryptography in a story. You'll know when you need it."
+
+    -go string_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag LIST_COMMAND
+"Lists," the wizard says. "Ordered collections of items. Useful when a single variable isn't enough, when you need to track multiple things of the same type."
+
+-tag list_selection
+-pick
+  #-list
+    "Declares a list in your config file," he explains. "Give it a name and the initial items. Items are space-separated."
+
+    [i]Syntax (in config.txt): -list inventory sword shield potion[/i]
+
+    "During the story you can check whether items are in the list, add to it, remove from it. It starts with whatever you put in config. An empty list is also fine, just -list inventory with no items."
+
+    -go list_selection
+  #-sort_asc
+    "Sorts a list in ascending order," he says. "Alphabetical for strings. Numerical for numbers."
+
+    [i]Syntax: -sort_asc listname[/i]
+
+    "Modifies the list in place. Everything is reordered from smallest to largest, A to Z."
+
+    -go list_selection
+  #-sort_des
+    "Sorts descending. Largest to smallest, Z to A."
+
+    [i]Syntax: -sort_des listname[/i]
+
+    "Same as -sort_asc but in the other direction."
+
+    -go list_selection
+  #-reverse
+    "Reverses the current order of the list," he says. "Doesn't sort, just flips whatever order it's already in."
+
+    [i]Syntax: -reverse listname[/i]
+
+    "If your list was [sword, shield, potion] it becomes [potion, shield, sword]. Handy for stack-like structures where you want to process the most recently added item first."
+
+    -go list_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag SAVELOAD_COMMAND
+"Save and load commands," the wizard says, settling back. "How the engine preserves state across sessions, and how you as an author can place checkpoints and capture moments."
+
+-tag saveload_selection
+-pick
+  #-save_checkpoint
+    "Places a checkpoint at the current story position," he explains. "The engine records everything, variables, choices made, current location, into a checkpoint slot."
+
+    [i]Syntax: -save_checkpoint[/i]
+
+    "No arguments. The checkpoint is tied to the story position where you placed the command. Players can load from this point later. Useful at the start of major scenes or before difficult choices."
+
+    -go saveload_selection
+  #-load_checkpoint
+    "Jumps back to the most recent checkpoint," he says. "The engine rewinds the story state, variables, position, everything, to that saved moment."
+
+    [i]Syntax: -load_checkpoint[/i]
+
+    "Use this to implement things like 'try again from checkpoint' buttons on fail states, or death screens that loop back to before the fatal choice."
+
+    -go saveload_selection
+  #-snapshot
+    "-snapshot tells the engine which variables to include in the stats screen snapshot for that particular story node," the wizard explains. "It's a hint to the system so it captures these variable values here."
+
+    [i]Syntax: -snapshot var1 var2 var3[/i]
+
+    "It is used in conjunction with the pickstats tool to get snapshots of those variables each time the game goes over the command. The tool then can save every value captured and give you aggregated data, like the minimum and maximum values eac variable reaches between all the iterations and stuff like that. Pretty useful for debugging unreachable checks and balance stat checks."
+
+    -go saveload_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag STATS_PANEL
+"The Stats Panel," the wizard says, gesturing to a floating translucent parchment to your left. "Think of it as the character's soul, laid bare in variables. It lives in its own file, [i]stats.txt[/i], and it's where players go to see how much gold they've wasted or how much the King hates them. Tell you what, I'll cast a few spells. Open your Stats menu while we talk, and you'll see the magic happen in real-time."
+
+-tag stats_selection
+-pick
+  #-stat_header
+    "Every scroll needs a title! -stat_header creates a bold section title. It's perfect for separating your 'Attributes' from your 'Bag of Garbage'."
+
+    [i]Syntax: -stat_header Title Text[/i]
+
+    "There! I've conjured a header called 'Wizard Training' into your panel."
+
+    -go stats_selection
+
+  #-stat_row
+    "The bread and butter," he says, tapping a line on the parchment. "It shows a label on the left and a variable's value on the right. 'Strength: 10', 'Name: Grog', you get the idea."
+    
+    -mvar demo_gold = 500
+    [i]Syntax: -stat_row "Gold Coins" demo_gold[/i]
+
+    "I've slipped 500 imaginary gold coins into your variables. Check the stats row to see the bounty!"
+
+    -go stats_selection
+
+  #-stat_break
+    "A bit of breathing room! It just puts a line or a gap between sections. Don't crowd your stats, or the players will get a headache."
+
+    [i]Syntax: -stat_break[/i]
+
+    "It's the 'silence' between the notes that makes the music, my friend. Use it to separate your character info from your inventory."
+
+    -go stats_selection
+
+  #-stat_bar
+    -mvar demo_mana = 75
+    "This one turns a number into a progress bar. Great for Health or Sanity. It assumes the variable is on a scale of 0 to 100. If it's at 50, the bar is half full."
+
+    [i]Syntax: -stat_bar "Mana Level" demo_mana[/i]
+
+    "I've set your Mana to 75%. Look at that bar glow! It's much more exciting than just seeing a number, isn't it?"
+
+    -go stats_selection
+
+  #-stat_vs
+    -mvar demo_alignment = 20
+    "A tug-of-war! This shows two opposing traits. Are you Lawful or Chaotic? Kind or Cruel? The variable moves the slider between two labels."
+
+    [i]Syntax: -stat_vs demo_alignment "Merciful" "Ruthless"[/i]
+
+    "I've set your alignment to 20. On a scale of 0 to 100, that puts you heavily on the 'Merciful' side, but you know very well how to turn it the other way."
+
+    -go stats_selection
+
+  #-stat_block
+    "Organization! You can group several rows or bars into a single visual card. It keeps things tidy when you have a lot of data to show."
+
+    [i]Syntax:[/i]
+    -nl
+    [i]-stat_block[/i]
+    -nl
+    [i]  -stat_row "Item" demo_gold[/i]
+    -nl
+    [i]-stat_block_end[/i]
+
+    "Wrap your related stats in a block to give them a nice border and background. It separates them from the rest making it more visually friendly."
+
+    -go stats_selection
+
+  #Go back to categories
+    -go main_selection
+
+
+-tag AUTHOR_TOOLS
+"The heavy guns!" The wizard produces a magnifying glass and peers through it at you. "These tools don't just tell the story; they ensure it doesn't collapse under its own weight. Let's look at the specific incantations."
+
+-tag author_selection
+-pick
+  #PickQuick (Testing)
+    "The Speed Demon. It spreads through your story like a virus in the blink of an eye, reaching everything the branches connect to, and finds crashes, missing things and a bunch more stuff under the rugs."
+
+    [i]Command:[/i]
+    -nl
+    [b]python -m author_tools/pickquick[/b]
+
+    "It checks for ghost tags, dead ends, and variables that were never declared. This is a must before publishing your story, unless you want to get rotten tomatoes as feedback for making your readers to play a broken game, it is the minimum checking you should do."
+
+    -go author_selection
+
+  #PickRandom & Stats (Simulating)
+    "The Simulator and the Data Cruncher. These run thousands of plays and turn the raw chaos into spreadsheets of balance data."
+
+    [i]Commands:[/i]
+    -nl
+    [b]python -m author_tools/pickrandom[/b]
+    -nl
+    [b]python -m author_tools/pickstats[/b]
+
+    "You can tune the 'pickrandom_and_stats_config.json' to set iterations, workers for parallel computing, and even calculate Min/Max/Mean stats for your variables using the -snapshot command. This is a tank and a plane. Robust, it'll catch even the things that pickquick can miss given enough iterations. And it will also give you a birds eye view of your branches and stats. Once you learn to use it, you can balance your game stats and possibly discover unreachable branches due to stats checks being out of range, so keep an eye on it, cause you'll probably need it."
+
+    -go author_selection
+
+  #Export Canvas (Mapping)
+    "The Cartographer. While the Web Player shows a map, this tool exports your logic into external formats like Obsidian Canvas or Mermaid."
+
+    [i]Command:[/i]
+    -nl
+    [b]python -m author_tools/export_canvas[/b]
+
+    "Check 'pickstats_config.json' to tweak card sizes, vertical gaps, and even color-code your cards based on variable changes (like turning a card green if 'gold' increases)!"
+
+    -go author_selection
+
+  #Web Player (The Mirror)
+    "The Living Story. This runs a local server so you can play in your browser. I have specialized launchers depending on your realm's OS!"
+
+    [i]On Linux/Mac:[/i] [b]./play_Linux_Mac.sh[/b]
+    -nl
+    [i]On Windows:[/i] [b]play_Windows.bat[/b]
+
+    "Be sure to check out how the -map_mode and -map_style look before you upload your story. Also, the map is a snitch giving away broken continuity, so if the map looks weird and mixed up, you probably have a problem somewhere in your branching."
+
+    -go author_selection
+
+  #Syntax Highlighter
+    "The Painter's Palette. A VS Code extension that colors your commands so you don't go cross-eyed. It makes your .pap (and .txt if you select it) files look like a work of art instead of a wall of gray text. This also runs pickquick in the background while you write your story, you won't notice it until, BAM! It shows you an error you just typed."
+
+    -go author_selection
+
+  #Go back to categories
+    -go main_selection
+
+
+-tag META_COMMAND
+"And finally," the wizard says, "the display syntax. How you weave your variables into the text itself, so the story feels alive and personal."
+
+-tag meta_selection
+-pick
+  #\$\{varname\} - display variable value
+    "The most common one," he says. "Wrap a variable name in dollar-sign curly braces and the engine replaces it with the variable's current value."
+
+    [i]Syntax: $ {varname}[/i] (without the space after the $)
+
+    "In your story text, you might write: 'You have ${health} health remaining.' If health is 75, the player sees: 'You have 75 health remaining.'"
+
+    "Works in choice labels too, not just prose. You can write a choice like '#Give ${item_name} to the guard' and the item name will appear correctly."
+
+    -go meta_selection
+  #\$$\{varname\} - display variable name
+    "This is the less common sibling," he says. "Double dollar-sign displays the variable's NAME, not its value."
+
+    [i]Syntax: $$ {varname}[/i] (without the space after the $)
+
+    "Mostly useful for debugging or meta-commentary. If you have a variable called 'player_title' and you write 'Your title is $${player_title}', the player sees: 'Your title is player_title'."
+
+    "Rarely needed in polished stories but occasionally exactly what you want for self-referential or meta-fictional moments."
+
+    -go meta_selection
+  #\@\{varname if 1|if 2|if 3\} - display text depending on variable value
+    "This is similar to the `${varname}` but it will display the item in the Nth number the varname is at that moment. So, if the variable is let's say 4, then it will show what you have put in the fourth position between the |straight bars|
+
+    [i]Syntax: @{varname this is shown if varname is 1|this if 2|this if 3|...}[/i]
+
+    -go meta_selection
+  #Text formatting
+    "Mhm, there are other ways to make your text prettier, or some think that. You can make text look in all these ways:"
+
+    [b]Bold[/b] using: \[b\] bold text here \[/b\]
+    -nl
+    [i]Italic[/i] using: \[i\] italic text here \[/i\]
+    -nl
+    [s]Strikethrough[/s] using: \[s\] striked text here \[/s\]
+    -nl
+    [u]Underline[/u] using: \[u\] underlined text here \[/u\]
+    -nl
+    [color= #737]colored text [/color] using: \[color\= #737\]colored text here \[/color\]
+    -nl
+    Colored [color= #d4af38] word [/color] using: \[color\= #d4af38\] word \[/color\]
+    -nl
+    And [url=https://pickapathgames.com]links[/url] using: \[url\=https://pickapathgames.com\]links\[/url\]
+
+    "Don't leave the inverted diagonal bars though, '\' these are just for showing you the inner syntax.
+
+    -go meta_selection
+  #Go back to categories
+    -go main_selection
+
+
+-tag finishing
+-reach_goal manual_completed
+"Are you sure?" The wizard squints at you lifting a brow. "Cause it doesn't- I mean," he clears his throat, "well, if you think you have enough, I guess you had enough. Who am I to say otherwise, right? Huh! Well, if you change your mind you can always come back and wander around."
+
+"Thanks!" You say nodding.
+
+"You know, there is also a little story behind here, perhaps you'd like to take a look at that, it might be of help if you plan to do any of this on your own, you know."
+
+"Any of this?"
+
+"Well yeah, you know, using your imagination," he says moving his hand with the palm up, "or what's left of it,"
+
+-pick
+  #"Hey! That's rude!"
+    "Hey! That's rude!"
+
+    "Don't blame me, I'm here to show you how things work around here, not to establish a system to impose a supposed education while adapting you from childhood to kill your creativity and propitiate the conditions to make you a simplistic average worker to keep the wheel spinning and the perpetuity of power and..." he stops staring at you.
+
+    Both stare at each other in silence, an uncomfortable one.
+
+    He looks away and stutters flapping his hands. "Well, nevermind, I'm going off road."
+
+    -go tutorial
+
+  #"Well yeah, I guess social media has its consequences."
+    "Well yeah, I guess social media has its consequences."
+
+    "I bet it does, just reading those papers," he shivers, "uhgg, what a nightmare." He looks at you, then away and back, "but don't worry, I'm sure you'll be fine."
+
+    "Thanks," you say with a smile.
+
+    -go tutorial
+
+  #"Are you challenging me?"
+    "Are you challenging me?"
+
+    The wizard looks at you with big open eyes, and emits a contained short laugh, "Hmm, ha, hahaha," it scales up, and he starts to laugh openly.
+
+    "Hey! Why are you laughing?"
+
+    "Hmm, haha, You take things too serious," he says holding himself, "but I like that," he points at you with a finger, "in fact, I would love to see what you can do with it."
+
+    "And I'm going to show you," you say crossing your arms.
+
+    -go tutorial
+
+-tag tutorial
+"Anyhow..." ${wizard_name} says rubbing his hands, "If you'd like to take a look, you can go here to the [url=https://pickapathgames.com/play/pick-a-path-demo]Pick A Path Demo[/url] and play around with it, or even use it as a template to start creating your own project."
+
+"That'll be handy."
+
+"Indeed. Don't forget to take a look at the tools available for authors, they'll save you a lot of headackes to fix all the errors you might have. No offense, those things always happen."
+
+You look at each other until the moment becomes uncomfortable. "Thanks," you finally say.
+
+"Yeah, no worries, come on, there's nothing else here, you can go whenever you want to," he ushes you with his hand and takes his notes out, flipping the pages and reading words in a murmur.
+
+-pause
+-end
+

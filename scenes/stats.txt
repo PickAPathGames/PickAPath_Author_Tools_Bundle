@@ -1,0 +1,28 @@
+-tag main_page
+-stat_header "Wizard Training"
+-stat_row "Gold Coins" demo_gold
+-stat_bar "Mana Level" demo_mana
+-stat_vs demo_alignment "Merciful" "Ruthless"
+-stat_break
+-stat_block
+  "Tutorial In Progress"
+-stat_block_end
+
+-pick
+  #About
+    -go about
+
+-tag about
+-stat_header "About"
+
+Pick A Path manual demo
+
+This is another page shown on the stats, you can have as many as you want as long as they stay inside the stats file.
+
+-stat_break
+
+-stat_row "Name" name
+
+-pick
+  #Main stats
+    -go main_page

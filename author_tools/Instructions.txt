@@ -1,0 +1,24 @@
+Open a console in the main folder
+
+Linux:
+```
+[your_user@your_user-your_pc_name pickapath]$ 
+```
+
+Type the command you want to run:
+
+```
+[your_user@your_user-your_pc_name pickapath]$ python -m author_tools.pickquick
+```
+```
+[your_user@your_user-your_pc_name pickapath]$ python -m author_tools.pickrandom
+```
+```
+[your_user@your_user-your_pc_name pickapath]$ python -m author_tools.pickstats
+```
+```
+[your_user@your_user-your_pc_name pickapath]$ python -m author_tools.export_canvas
+```
+```
+[your_user@your_user-your_pc_name pickapath]$ author_tools/play_Linux_Mac.sh
+```

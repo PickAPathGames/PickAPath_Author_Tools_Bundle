@@ -1,0 +1,101 @@
+{
+  "format_version": "1.1",
+  "save_type": "player_slot",
+  "game_id": null,
+  "game_version": null,
+  "created_at": "2026-08-23T19:38:45.653048",
+  "display_name": "Auto-save",
+  "author_note": null,
+  "is_read_only": false,
+  "seed": 38356,
+  "start_node": {
+    "scene": "manual",
+    "tag": "init"
+  },
+  "choice_tape": [
+    "c0",
+    "c11"
+  ],
+  "entropy_tape": [],
+  "playhead_idx": 12,
+  "playhead_canonical_id": "manual::finishing::p_fd91a7f9",
+  "vars_snapshot": {
+    "demo_gold": 10,
+    "demo_mana": 10,
+    "demo_alignment": 50,
+    "wizard": "Wiz",
+    "wizard_name": "Wiz",
+    "name": "name",
+    "gender": 0,
+    "clothes": 0,
+    "imagination": 20,
+    "map_visibility": "\"full\"",
+    "map_style": "\"cards\"",
+    "cheat_mode": false,
+    "author_mode": true,
+    "manual_completed": true,
+    "goals_reached": [
+      "manual_completed"
+    ],
+    "_cont": 0,
+    "_checkpoints": {
+      "_autosave": 9
+    },
+    "_selection": ""
+  },
+  "telemetry_path": [
+    [
+      "manual::init",
+      0
+    ],
+    [
+      "manual::start",
+      1
+    ],
+    [
+      "manual::start::b_67cc19a2",
+      2
+    ],
+    [
+      "manual::start::p_7f768074",
+      3
+    ],
+    [
+      "manual::start::p_7f768074::opt_05110f13",
+      4
+    ],
+    [
+      "manual::continue",
+      5
+    ],
+    [
+      "manual::continue::b_0ebb9523",
+      6
+    ],
+    [
+      "manual::panel",
+      7
+    ],
+    [
+      "manual::main_selection",
+      8
+    ],
+    [
+      "manual::main_selection::p_ae50de95",
+      9
+    ],
+    [
+      "manual::main_selection::p_ae50de95::opt_7adde072",
+      10
+    ],
+    [
+      "manual::finishing",
+      11
+    ],
+    [
+      "manual::finishing::p_fd91a7f9",
+      12
+    ]
+  ],
+  "checksum": "7cc1c99ce1643400"
+}

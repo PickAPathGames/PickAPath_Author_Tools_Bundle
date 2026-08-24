@@ -1,0 +1,49 @@
+-title Pick A Path Tutorial
+-author Pick A Path
+
+-indent 2
+
+-files
+  manual
+
+# SETTINGS
+-author_mode = true
+-ignore -author_mode = false
+-ignore -cheat_mode = True
+
+# MAP MODE
+-map_mode = "full"  
+-ignore -map_mode = "visited"
+-ignore -map_mode = "wire"
+
+# MAP STYLE
+-map_style = "cards"
+-ignore -map_style = "nodes"
+-ignore -map_style = "lines"
+
+-ignore -map_exclude exclude_this_file_from_map exclude_this_other_file_from_map
+
+# PERMANENT STATS (only shown in mobile)
+-ignore -permanent_stat 1 "gold" demo_gold
+-permanent_stat 2 "mana" demo_mana
+-permanent_stat 3 "alignment" demo_alignment
+
+# STATS
+-var demo_gold = 10
+-var demo_mana = 10
+-var demo_alignment = 50
+-var wizard = "Wiz"
+-var wizard_name = "Wiz"
+-var name = "name"
+-var gender = 0
+-var clothes = 0
+-var imagination = 20
+
+
+# ACHIEVEMENTS
+-define_goal manual_completed
+  -visible = true
+  -points = 10
+  -prompt = "PickAPath 101 completed."
+  -description = "Unless you were cheating, you should have everything you need to create your interactive masterpiece."
+

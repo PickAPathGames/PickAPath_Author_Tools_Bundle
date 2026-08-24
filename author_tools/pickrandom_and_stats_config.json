@@ -1,0 +1,29 @@
+{
+  "available_seed_mode": "linear or random",  
+  "seed_mode": "linear",
+  "seed_offset": 0,
+  "seed": 0,
+
+  "iterations": 5000,
+  "workers": 12,
+  "loop_limit": 1000,
+
+  "snapshots": {
+    "enabled": true,
+    "clean": true,
+    "stats": {
+      "min": true,
+      "max": true,
+      "mean": true
+    }
+  },
+
+  "raw_snapshots": {
+    "enabled": false
+  },
+
+  "coverage": {
+    "enabled": true,
+    "export_branch_coverage": true
+  }
+}

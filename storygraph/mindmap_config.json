@@ -1,0 +1,54 @@
+{
+  "card": {
+    "auto_size": true,
+    "center_in_column": true,
+    "min_width": 100,
+    "max_width": 500,
+    "line_height": 20,
+    "char_width": 13,
+    "padding_x": 0,
+    "padding_y": 20
+  },
+
+  "layout": {
+    "col_width": 520,
+    "min_col_width": 140,
+    "col_pad": 120,
+    "vert_gap": 50,
+    "bundle_gap": 300
+  },
+
+  "variable_colors": [
+    {
+      "var": "ints",
+      "color": "1"
+    },
+    {
+      "var": "intelligence",
+      "color": "6"
+    },
+    {
+      "var": "strength",
+      "ops": ["+", "%+"],
+      "color": "2"
+    },
+    {
+      "var": "strength",
+      "ops": ["-", "%-"],
+      "color": "1"
+    },
+    {
+      "var": "train_strength",
+      "color": "#ec74ae"
+    }
+  ],
+
+  "exporters": {
+    "obsidian_canvas": true,
+    "freemind": false,
+    "freeplane": false,
+    "mermaid": false,
+    "graphviz": false,
+    "drawio": false
+  }
+}

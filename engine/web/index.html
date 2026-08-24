@@ -1,0 +1,336 @@
+<!-- offline player -->
+<!-- engine/web/index.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pick Engine Player</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/svg-pan-zoom@3.6.1/dist/svg-pan-zoom.min.js"></script>
+</head>
+<body>
+
+    <div id="game-shell">
+
+    <nav id="mobile-nav">
+        <button class="mobile-nav-btn active" id="mnav-story"
+                onclick="mobileShowStory()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M4 6h16M4 10h16M4 14h10"/>
+            </svg>
+            Story
+        </button>
+        <button class="mobile-nav-btn" id="mnav-stats"
+                onclick="mobileShowPanel('stats')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            Stats
+        </button>
+        <button class="mobile-nav-btn" id="mnav-goals"
+                onclick="mobileShowPanel('goals')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M12 8v4l3 3"/>
+            </svg>
+            Goals
+        </button>
+        <button class="mobile-nav-btn" id="mnav-saves"
+                onclick="mobileShowPanel('saves')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/>
+                <polyline points="17 21 17 13 7 13 7 21"/>
+                <polyline points="7 3 7 8 15 8"/>
+            </svg>
+            Saves
+        </button>
+        <button class="mobile-nav-btn" id="mnav-config"
+                onclick="mobileShowPanel('config')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/>
+                <path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/>
+            </svg>
+            Config
+        </button>
+        <button class="mobile-nav-btn" id="mnav-map"
+                onclick="mobileToggleMap()">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="3 6 9 3 15 6 21 3 21 18 15 21 9 18 3 21"/>
+                <line x1="9" y1="3" x2="9" y2="18"/>
+                <line x1="15" y1="6" x2="15" y2="21"/>
+            </svg>
+            Map
+        </button>
+        <button class="mobile-nav-btn" id="mnav-about"
+                onclick="mobileShowPanel('about')">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="2"  y1="12" x2="9"  y2="12"/>
+                <line x1="9"  y1="12" x2="14" y2="6"/>
+                <line x1="9"  y1="12" x2="14" y2="12"/>
+                <line x1="9"  y1="12" x2="14" y2="18"/>
+                <line x1="14" y1="6"  x2="22" y2="6"/>
+                <line x1="14" y1="12" x2="22" y2="12"/>
+                <line x1="14" y1="18" x2="22" y2="18"/>
+            </svg>
+            About
+        </button>
+    </nav>
+        <aside id="sidebar">
+            <div class="sidebar-footer">
+                Last Reload: <span id="reload-time">--:--:--</span>
+            </div>
+            <div id="health-indicator">
+                <span id="health-dot"></span>
+                <span id="health-label">Project Healthy</span>
+                <button onclick="restartGame()" class="mini-btn">Restart & Reload</button>
+            </div>
+        
+            <nav class="sidebar-tabs">
+                <button onclick="switchTab('stats')" class="tab-btn active">Stats</button>
+                <button onclick="switchTab('goals')" class="tab-btn">Goals</button>
+                <button onclick="switchTab('saves')" class="tab-btn">Saves</button>
+                <button onclick="switchTab('config')" class="tab-btn">Config</button>
+                <button onclick="switchTab('about')" class="tab-btn">About</button>
+
+            </nav>
+            
+            
+            <div id="tab-stats" class="tab-content active">
+                <div class="sidebar-header">CHARACTER</div>
+                <div id="permanent-stat-bar" class="stat-grid-container">
+                    <div class="stat-slot" id="slot-0"></div>
+                    <div class="stat-slot" id="slot-1"></div>
+                    <div class="stat-slot" id="slot-2"></div>
+                    <div class="stat-slot" id="slot-3"></div>
+                </div>
+            </div>
+
+            <div id="tab-goals" class="tab-content">
+                <div class="sidebar-header">GOALS</div>
+                <div id="goals-list" class="goals-container">
+                    </div>
+            </div>
+
+            <div id="tab-saves" class="tab-content">
+                <div class="sidebar-header">SAVES</div>
+                <div id="author-pick-section" class="save-section" style="display:none">
+                    <div class="save-section-label">Author's Pick</div>
+                    <div class="author-pick-card">
+                        <div class="save-card-name" id="author-pick-name">Author's Playthrough</div>
+                        <div class="save-card-meta" id="author-pick-meta">Read-only guided mode</div>
+                        <div class="save-card-actions">
+                            <button class="save-btn save-btn-load" onclick="loadAuthorPick()">Play</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="save-section">
+                    <div class="save-section-label">
+                        Save Slots
+                        <button class="save-btn save-btn-small" onclick="refreshSaveSlots()" title="Refresh slot list">↺</button>
+                    </div>
+                    <div id="save-slots-list">
+                        <!-- Populated by refreshSaveSlots() -->
+                        <div class="save-slots-loading">Loading slots...</div>
+                    </div>
+                </div>
+                <div class="save-section">
+                    <div class="save-section-label">Bug Report</div>
+                    <div class="bug-report-row">
+                        <input type="text" id="bug-comment" class="bug-input"
+                               placeholder="Describe the issue (optional)">
+                        <button class="save-btn save-btn-danger" onclick="exportBugReport()">Export</button>
+                    </div>
+                    <div id="bug-report-status" class="save-status-msg" style="display:none"></div>
+                </div>
+                <div class="save-section">
+                    <div class="save-section-label">Load from File</div>
+                    <div class="bug-report-row">
+                        <label class="save-btn save-btn-file" for="load-file-input">Choose File</label>
+                        <input type="file" id="load-file-input" accept=".json"
+                               onchange="loadFromFile(event)" style="display:none">
+                    </div>
+                    <div id="load-file-status" class="save-status-msg" style="display:none"></div>
+                </div>
+
+                <div id="save-status-bar" class="save-status-bar" style="display:none"></div>
+            </div>
+
+            <div id="tab-config" class="tab-content">
+                <div class="sidebar-header">SETTINGS</div>
+
+                <div class="config-item">
+                    <span class="config-label">Text Size</span>
+                    <input type="range" min="6" max="30" value="16"
+                        oninput="updateFontSize(this.value)"
+                        style="width:120px">
+                </div>
+
+                <div class="config-item">
+                    <span class="config-label">Theme</span>
+                    <div class="theme-toggle">
+                        <button class="theme-toggle-btn active" id="btn-theme-dark"
+                                onclick="setTheme('dark')">Dark</button>
+                        <button class="theme-toggle-btn" id="btn-theme-light"
+                                onclick="setTheme('light')">Light</button>
+                    </div>
+                </div>
+
+                <div class="mobile-only-block" style="margin-top: 20px; padding: 10px;">
+                    <button onclick="if(confirm('Are you sure you want to restart?')) restartGame()" 
+                            class="mini-btn" 
+                            style="width: 100%; height: 40px; border-color: #ef4444; color: #f87171;">
+                        Restart Game
+                    </button>
+                </div>
+            </div>
+
+            <div id="tab-about" class="tab-content" style="padding: 20px;">
+                <div class="sidebar-header" style="letter-spacing: 2px; margin-bottom: 20px;">ENGINE STATUS</div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                    <span style="color: var(--text-dim); font-size: 0.85rem;">Version</span>
+                    <span style="color: white; font-size: 0.85rem; font-family: monospace;">1.0.0-stable</span>
+                </div>
+                
+                <div style="display: flex; justify-content: space-between; margin-bottom: 12px; border-bottom: 1px solid rgba(255,255,255,0.05); padding-bottom: 8px;">
+                    <span style="color: var(--text-dim); font-size: 0.85rem;">Environment</span>
+                    <span style="color: #68d391; font-size: 0.75rem; font-weight: bold;">LOCAL_DEV</span>
+                </div>
+
+                <div style="margin-top: 32px;">
+                    <p style="font-size: 0.75rem; color: var(--text-dim); line-height: 1.5;">
+                        This is the Pick A Path offline runtime. Changes to your <code>.pap</code> or <code>.json</code> source files will require a refresh to take effect.
+                    </p>
+                </div>
+
+                <div style="margin-top: 40px; text-align: center; opacity: 0.4;">
+                    <small style="font-size: 0.7rem;">&copy; 2026 Pick A Path</small>
+                </div>
+            </div>
+
+        </aside> 
+        
+        <div class="resizer" id="resizer-left"></div>
+
+        <main id="viewport">
+            <nav class="nav-controls">
+                <button data-intent="step_back" onclick="sendIntent('step_start')" title="Go to the first node (home)"><<</button>
+                <button data-intent="step_back" onclick="sendIntent('step_back_10')" title="Back 10 ([])">10 <</button>
+                <button data-intent="step_back" onclick="sendIntent('step_back')" title="Step Back (←)"><</button>
+                <button data-intent="step_forward" onclick="sendIntent('step_forward')" title="Step Forward (→)">></button>
+                <button data-intent="step_forward" onclick="sendIntent('step_forward_10')" title="Forward 10 (])">> 10</button>
+                <button data-intent="step_forward" onclick="sendIntent('step_end')" title="Go to the current last node (end)">>></button>
+                <button onclick="sendIntent('pick_random')" title="Random Pick (r)">Rnd</button>
+                <button id="btn-mode-toggle"
+                        onclick="toggleMode()"
+                        style="display:none"
+                        title="Switch between interactive and author's pick reading mode">
+                    Author's Pick
+                </button>
+            </nav>
+
+            <div id="mobile-permanent-stats" style="display:none"></div>
+            
+            <div id="story-scroll">
+                <div id="story-content"></div>
+                <div id="choice-container"></div>
+            </div>
+        </main>
+
+        <div class="resizer" id="resizer-right"></div>
+
+        <section id="map-panel">
+            <div class="sidebar-header" style="padding: 10px; display: flex; justify-content: space-between; align-items: center;">
+                <span id="map-header-title">STORY MAP</span>
+                <div class="map-controls">
+                    <label for="camera-speed" style="font-size: 10px; color: #ccc;">Speed:</label>
+                    <input type="range" id="camera-speed" min="0.05" max="1.0" step="0.05" value="0.15" title="Animation Smoothness">
+                    <button id="btn-map-filter" onclick="toggleMapFilter()">Showing: Current Chapter</button>
+                    <button id="btn-auto-center" onclick="toggleAutoCenter()" title="Lock Position (l)">Center Lock</button>
+                    <button id="btn-free-lock" onclick="toggleFreeLock()" title="Free Lock Position (k)">Free Lock</button>
+                    <button onclick="mapAction('zoomIn')" title="Zoom In">+</button>
+                    <button onclick="mapAction('zoomOut')" title="Zoom Out">−</button>
+                    <button onclick="mapAction('fit')" title="Fit to Screen (f)">Fit to View</button>
+                    <button onclick="mapAction('center')" title="Center Active (c)">◎</button>
+                </div>
+            </div>
+
+            <div id="map-viewport" style="width: 100%; height: 100%; overflow: hidden;">
+                <style>
+                    #map-debug-overlay {
+                        position: absolute;
+                        top: 0; left: 0; width: 100%; height: 100%;
+                        pointer-events: none;
+                        z-index: 9999;
+                    }
+                    .debug-center-line {
+                        position: absolute;
+                        background: rgba(255, 0, 0, 0.4);
+                    }
+                    #debug-node-dot {
+                        position: absolute;
+                        width: 12px; height: 12px;
+                        background: lime;
+                        border-radius: 50%;
+                        border: 2px solid black;
+                        transform: translate(-50%, -50%);
+                        display: none;
+                    }
+                </style>
+                <svg id="canvas-svg" width="100%" height="100%" style="min-height: 500px;">
+                    <g id="viewport-group">
+                        <g id="edges-layer"></g>
+                        <g id="nodes-layer"></g>
+                    </g>
+                </svg>
+            </div>
+        </section>
+    </div>
+    <div id="save-name-dialog" class="save-dialog-overlay" style="display:none" onclick="closeSaveDialog(event)">
+        <div class="save-dialog-box">
+            <div class="save-dialog-title">Name this save</div>
+            <input type="text" id="save-name-input" class="save-dialog-input"
+                   placeholder="e.g. Before the big choice" maxlength="60">
+            <div class="save-dialog-actions">
+                <button class="save-btn" onclick="closeSaveDialog()">Cancel</button>
+                <button class="save-btn save-btn-load" onclick="confirmSave()">Save</button>
+            </div>
+        </div>
+    </div>
+    <div id="toast-container" style="position: fixed; top: 20px; right: 20px; z-index: 9999;"></div>
+    <div id="mobile-panel-overlay">
+        <div class="mobile-panel-content" id="mobile-panel-content"></div>
+    </div>
+
+    <div id="mobile-map-overlay">
+        <div id="mobile-map-viewport">
+            <svg id="mobile-canvas-svg" width="100%" height="100%">
+                <g id="mobile-viewport-group">
+                    <g id="mobile-edges-layer"></g>
+                    <g id="mobile-nodes-layer"></g>
+                </g>
+            </svg>
+        </div>
+        <div id="mobile-map-controls">
+            <button onclick="mobileMapAction('fit')">Fit</button>
+            <button onclick="mobileMapAction('zoomIn')">+</button>
+            <button onclick="mobileMapAction('zoomOut')">−</button>
+            <button onclick="mobileMapAction('center')">◎</button>
+        </div>
+    </div>
+
+    <script src="js/save_manager.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
